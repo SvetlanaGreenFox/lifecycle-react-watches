@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Clock from './Clock.js';
 
 class ClockItem extends React.Component {
   constructor(props) {
@@ -15,15 +16,12 @@ class ClockItem extends React.Component {
   componentDidMount() {
     this.update = setInterval(() => {
       const today = new Date();
-
       const localoffset = -(today.getTimezoneOffset() / 60);
       const destoffset = this.state.offset;
-
       const offset = destoffset - localoffset;
+      const date = new Date(new Date().getTime() + offset * 3600 * 1000);
 
-      const d = new Date(new Date().getTime() + offset * 3600 * 1000);
-
-      this.setState({ time: d });
+      this.setState({ time: date });
     }, 1 * 1000);
   }
   componentWillUnmount() {
@@ -31,13 +29,12 @@ class ClockItem extends React.Component {
   }
 
   showClock() {
-    const { city, time, id, remove } = this.state;
-    
+    const { city, time, remove, id } = this.state;
     return (
       <div className="clockItem">
         <div className="clockItem__data">
           <h3>{city}</h3>
-          <h4>{time.toLocaleTimeString()}</h4>
+          <Clock time={time} />
         </div>
         <button className="clockItem__button" onClick={() => remove(id)}>
           x
@@ -54,7 +51,6 @@ class ClockItem extends React.Component {
 }
 
 ClockItem.propTypes = {
-  id: PropTypes.number,
   city: PropTypes.string,
   offset: PropTypes.string,
   remove: PropTypes.func,

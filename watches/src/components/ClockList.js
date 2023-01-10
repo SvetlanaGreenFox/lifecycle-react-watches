@@ -5,10 +5,6 @@ import PropTypes from 'prop-types';
 function ClockList(props) {
   const { remove, list } = props;
 
-  function removeItem(id) {
-    remove(id);
-  }
-  console.log(list);
   return (
     <div className="clockList">
       {list.length
@@ -17,7 +13,7 @@ function ClockList(props) {
               id={item.id}
               city={item.city}
               timezone={item.timezone}
-              remove={removeItem}
+              remove={remove}
             />
           ))
         : null}
