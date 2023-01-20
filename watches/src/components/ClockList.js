@@ -11,7 +11,7 @@ function ClockList(props) {
         ? list.map((item) => (
             <ClockItem
               key={item.id}
-							id={item.id}
+              id={item.id}
               city={item.city}
               timezone={item.timezone}
               remove={remove}
