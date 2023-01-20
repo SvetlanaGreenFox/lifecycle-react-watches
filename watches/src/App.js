@@ -22,11 +22,7 @@ function App() {
   }
 
   function remove(id) {
-    setClock(
-      clock.filter((item) => {
-        return item.id !== id;
-      })
-    );
+		setClock(prevState => prevState.filter(item => item.id !== id));
   }
 
   return (
